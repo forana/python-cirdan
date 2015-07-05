@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ name }} - Docs</title>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
+        <style type="text/css">
+            * {
+                box-sizing: border-box;
+            }
+
+            html, body {
+                min-height: 100%;
+            }
+
+            body {
+                font-size: 16px;
+                font-family: sans-serif;
+
+                color: #111;
+                background-color: #FFF;
+                margin: 0px;
+            }
+
+            p {
+                margin: 12px;
+            }
+
+            b, strong {
+                font-weight: bold;
+            }
+
+            i, em {
+                font-style: italic;
+            }
+
+            code, pre {
+                font-family: monospace;
+                background-color: #EEE;
+                padding: 2px;
+            }
+
+            pre {
+                padding: 6px;
+            }
+
+            .content {
+                margin: 12px;
+                padding-left: 250px;
+            }
+
+            .title {
+                font-size: 32px;
+                font-weight: bold;
+            }
+
+            .resource, .route {
+                border: 2px solid #3CF;
+                margin-top: 12px;
+                padding: 12px;
+                border-radius: 12px;
+            }
+
+            .resource-name {
+                font-size: 32px;
+                font-weight: bold;
+            }
+
+            .route-name {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .anchor {
+                color: #CCC;
+                font-size: 50%;
+            }
+
+            .anchor:hover {
+                color: #333;
+            }
+
+            .path {
+                font-family: monospace;
+            }
+
+            .verb {
+                font-weight: bold;
+            }
+
+            .parameters-name {
+                font-weight: bold;
+                font-size: 18px;
+                margin-top: 4px;
+            }
+
+            ul li {
+                margin: 4px 1.5em;
+                list-style-type: disc;
+
+            }
+
+            .param-name {
+                font-weight: bold;
+            }
+
+            .built-using {
+                font-size: 12px;
+                margin: 20px;
+            }
+
+            .navigation {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 250px;
+                height: 100%;
+                overflow-y: auto;
+                padding: 12px;
+                border-right: 2px solid #EEE;
+            }
+
+            .navigation .item {
+                padding: 6px;
+                border: 1px solid #DDD;
+                border-radius: 4px;
+                margin-bottom: 6px;
+            }
+
+            .navigation .item a {
+                color: #000;
+                text-decoration: none;
+            }
+
+            .navigation .item a:hover {
+                color: #369;
+                text-decoration: underline;
+            }
+
+            .item-name {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="content">
+            <header class="title">{{ name }}</header>
+            <p class="introduction">{{ intro_text }}</p>
+            {% for resource in resources %}
+                <section class="resource">
+                    <header class="resource-name">{{ resource.title }} <a class="anchor" name="{{ resource.safe_title() }}" href="#{{ resource.safe_title() }}">#</a></header>
+                    <header class="path">{{ resource.path }}</header>
+                    {% if resource.description %}<p class="description">{{ resource.description.replace("\n", "<br/>") }}</p>{% endif %}
+
+                    {% for route in resource.methods %}
+                        <section class="route">
+                            <header class="route-name">{{ route.title }} <a class="anchor" name="{{ resource.safe_title() }}.{{route.verb}}" href="#{{ resource.safe_title() }}.{{route.verb}}">#</a></header>
+                            <header class="path"><span class="verb">{{ route.verb }}</span> {{resource.path}}</header>
+                            {% if route.parameters %}
+                                <header class="parameters-name">Query Parameters:</header>
+                                <ul class="parameters">
+                                    {% for param in route.parameters %}
+                                        <li>
+                                            <span class="param-name">{{ param.name }}</span>
+                                            -
+                                            {{param.description }}
+                                            {% if param.required %}<span class="required">(required)</span>{% endif %}
+                                        </li>
+                                    {% endfor%}
+                                </ul>
+                            {% endif %}
+                            {% if route.description %}<p class="description">{{ route.description.replace("\n", "<br/>")  }}</p>{% endif %}
+                        </section>
+                    {% endfor %}
+                </section>
+            {% endfor %}
+
+            <footer class="built-using">Documentation built using <a href="https://github.com/forana/python-cirdan">Cirdan</a></footer>
+        </section>
+
+        <section class="navigation">
+            <section class="item">
+                <header class="item-name"><a href="#">Introduction</a></header>
+            </section>
+            {% for resource in resources %}
+                <section class="item">
+                    <header class="item-name"><a href="#{{ resource.safe_title() }}">{{ resource.title }}</a></header>
+                    <ul>
+                        {% for route in resource.methods %}
+                            <li><a href="#{{ resource.safe_title() }}.{{ route.verb }}">{{ route.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endfor %}
+
+            <footer class="built-using">Documentation built using <a href="https://github.com/forana/python-cirdan">Cirdan</a></footer>
+        </section>
+    </body>
+</html>
