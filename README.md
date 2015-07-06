@@ -39,7 +39,7 @@ app.add_route("/something", SomeResource())
 simple_server.make_server("localhost", 8080, app).serve_forever()
 ```
 
-Run that, then navigate to [http://localhost:8080/docs](http://localhost:8080/docs) in your browser. It's that simple - Cirdan is automatically bound, and knows about all of your routes. See [demo.py](./demo.py) for a more extended example - a running version of the docs it generates is [available on Heroku](http://cirdan.herokuapp.com).
+Run that, then navigate to [http://localhost:8080/docs](http://localhost:8080/docs) in your browser. It's that simple - Cirdan is automatically bound, and knows about all of your routes. See [demo.py](./demo.py) for a more extended example - a running version of the docs it generates is [available on Heroku](http://cirdan.herokuapp.com/docs).
 
 ## License
 
