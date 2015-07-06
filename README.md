@@ -12,7 +12,7 @@ This was built with the thought in mind that every step of documenting your API 
 pip install cirdan
 ```
 
-[Docs for Cirdan can be found here.](https://github.com/forana/python-cirdan/wiki)
+[Docs for Cirdan can be found here.](./docs.md)
 
 ## Quick Example
 

@@ -5,6 +5,9 @@ from cirdan.decorators import *
 
 cirdan.inject()
 
+"""
+This really just makes sure it compiles. Doesn't do any meaningful checks.
+"""
 def test_all_the_things():
     api = falcon.API()
 

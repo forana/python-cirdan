@@ -1,7 +1,12 @@
 from __future__ import absolute_import
 
+"""
+Resource and route decorators.
+"""
+
 from cirdan.registry import registry, Parameter
 
+# Marks the title of a resource class or route method.
 def title(value):
     def inner(wrapped):
         item = registry.get(wrapped)
@@ -9,6 +14,7 @@ def title(value):
         return wrapped
     return inner
 
+# Marks the description of a resource class or route method.
 def description(value):
     def inner(wrapped):
         item = registry.get(wrapped)
@@ -16,6 +22,7 @@ def description(value):
         return wrapped
     return inner
 
+# Marks a parameter to a route.
 def param(name, description, required = False):
     def inner(wrapped):
         item = registry.get(wrapped)

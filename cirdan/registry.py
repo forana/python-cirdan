@@ -1,5 +1,9 @@
 from __future__ import absolute_import
 
+"""
+The actual record-keeping part of Cirdan.
+"""
+
 import inspect
 import itertools
 import re
@@ -36,9 +40,10 @@ class Parameter:
         self.description = description
         self.required = required
 
-    def __star__(self):
+    def __str__(self):
         return "%s: %s (required = %s" % (self.name, self.description, repr(self.required))
 
+# this is an ordered dict because I am a lazy, lazy man
 METHODS_TO_VERBS = OrderedDict([
     ("on_post", "POST"),
     ("on_get", "GET"),

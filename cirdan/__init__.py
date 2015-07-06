@@ -15,6 +15,11 @@ def inject():
     falcon.API.add_route = register
 
 def set_meta(api, name = "Docs", intro_text = "", **kwargs):
+    """
+    A quick aside here - this is a function in the cirdan module instead of a
+    monkey-patch into falcon because falcon uses __slots__, and thus can't have
+    new properties bound.
+    """
     registry.set_api_meta(api, name = name, intro_text = intro_text, **kwargs)
 
 def register(api, path, resource):
