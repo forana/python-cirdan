@@ -25,6 +25,9 @@ Sets the descripion of a resource class or route method. This can include HTML t
 ### @param(_name_, _description_[, _required_ = False])
 Notes that a route method takes in a parameter with `name` and `description`. The optional parameter `required` is a boolean that marked if this parameter must be sent.
 
+### @return_status(_status\_code_, _description_)
+Notes that a route returns a particular status code and describes when that would happen.
+
 ## API Usage
 
 I've only documented the functions that are intended to be publicly used - if you want to wade through the source, there are nasty but nifty things you could do, I'm sure.
@@ -45,9 +48,21 @@ Settable boolean property (defaulting to `True`) that tells Cirdan if it should 
 
 Settable properties that are passed through to the rendered template. `name` and `intro_text` are given defaults - these are used as the page title, main header, and intro text paragraph in the default template.
 
-### cirdan.registry.dump()
+### cirdan.registry.dump(_api_)
 
-Dumps the bound resources and their routes to standard out. I like to do this before letting the server start (as seen in `demo.py`). Just sort of nifty.
+Dumps an API's bound resources and their routes to standard out. I like to do this before letting the server start (as seen in `demo.py`). Just sort of nifty.
+
+## Interoperability with other route decorators
+If you use any custom route decorators other than Cirdan's, make sure that if you return a wrapped function, you keep the function name intact, like so:
+
+```python
+def some_decorator(func):
+    def inner(self, req, res):
+        something()
+        func(self, res, res)
+    inner.__name__ = func.__name__ # this is the important line
+    return inner
+```
 
 ## Bugs / Issues / etc
 

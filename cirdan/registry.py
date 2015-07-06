@@ -30,6 +30,7 @@ class RouteMethod:
         self.title = self.verb
         self.description = None
         self.parameters = []
+        self.return_statuses = []
 
     def __str__(self):
         return "%s: %s" % (self.verb, str(self.title))
@@ -42,6 +43,11 @@ class Parameter:
 
     def __str__(self):
         return "%s: %s (required = %s" % (self.name, self.description, repr(self.required))
+
+class ReturnStatus:
+    def __init__(self, status_code, description):
+        self.status_code = status_code
+        self.description = description
 
 # this is an ordered dict because I am a lazy, lazy man
 METHODS_TO_VERBS = OrderedDict([

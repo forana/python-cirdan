@@ -87,7 +87,7 @@
                 font-weight: bold;
             }
 
-            .parameters-name {
+            .parameters-name, .return-statuses-name {
                 font-weight: bold;
                 font-size: 18px;
                 margin-top: 4px;
@@ -99,7 +99,7 @@
 
             }
 
-            .param-name {
+            .param-name, .return-status {
                 font-weight: bold;
             }
 
@@ -166,6 +166,18 @@
                                             {% if param.required %}<span class="required">(required)</span>{% endif %}
                                         </li>
                                     {% endfor%}
+                                </ul>
+                            {% endif %}
+                            {% if route.return_statuses %}
+                                <header class="return-statuses-name">Expectable Return Statuses:</header>
+                                <ul class="return-statuses">
+                                    {% for status in route.return_statuses %}
+                                        <li>
+                                            <span class="return-status">{{ status.status_code }}</span>
+                                            -
+                                            {{ status.description }}
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             {% endif %}
                             {% if route.description %}<p class="description">{{ route.description.replace("\n", "<br/>")  }}</p>{% endif %}

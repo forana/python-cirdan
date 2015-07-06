@@ -36,6 +36,8 @@ def test_all_the_things():
             res.body = "{}"
 
         @param("what is this", "what are thooooose")
+        @returns_status(201, "Now")
+        @returns_status(204, "Later")
         def on_delete(self, req, res):
             res.body = "{}"
 
