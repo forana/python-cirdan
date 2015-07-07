@@ -4,6 +4,8 @@ from __future__ import absolute_import
 Resource and route decorators.
 """
 
+import json
+
 from cirdan.registry import registry, Parameter, ReturnStatus
 
 # Marks the title of a resource class or route method.
@@ -57,5 +59,16 @@ def requires_permission(value):
     def inner(wrapped):
         route = registry.get(wrapped)
         route.requires_permission = value
+        return wrapped
+    return inner
+
+# Provides an example request and/or response for a route
+def example(request = None, response = None):
+    def inner(wrapped):
+        route = registry.get(wrapped)
+        if request is not None:
+            route.example_request = request if isinstance(request, str) else json.dumps(request, indent = 4)
+        if response is not None:
+            route.example_response = response if isinstance(response, str) else json.dumps(response, indent = 4)
         return wrapped
     return inner

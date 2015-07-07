@@ -31,6 +31,7 @@ def test_all_the_things():
             res.body = "{}"
 
         @title("hi")
+        @example(request = "bananas", response = {})
         def on_put(self, req, res):
             res.body = "{}"
 

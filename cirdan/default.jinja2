@@ -87,7 +87,7 @@
                 font-weight: bold;
             }
 
-            .parameters-name, .return-statuses-name {
+            .parameters-name, .return-statuses-name, .example-name {
                 font-weight: bold;
                 font-size: 18px;
                 margin-top: 4px;
@@ -173,6 +173,14 @@
                             {% endif %}
                             {% if route.content_type %}
                                 <header class="content-type-name"><span class="content-type">Content-Type: </span> {{ route.content_type }}</header>
+                            {% endif %}
+                            {% if route.example_request %}
+                                <header class="example-name">Example Request:</header>
+                                <pre>{{ route.example_request }}</pre>
+                            {% endif %}
+                            {% if route.example_response %}
+                                <header class="example-name">Example Response:</header>
+                                <pre>{{ route.example_response }}</pre>
                             {% endif %}
                             {% if route.return_statuses %}
                                 <header class="return-statuses-name">Expectable Return Statuses:</header>

@@ -35,6 +35,8 @@ class RouteMethod:
         self.content_type = None
         self.requires_permission = None
         self.secret = False
+        self.example_request = None
+        self.example_response = None
 
     def __str__(self):
         return "%s: %s" % (self.verb, str(self.title))

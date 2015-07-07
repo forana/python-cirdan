@@ -55,6 +55,11 @@ Words.
 
 Words.
     """)
+    @example(request = {
+                "name": "Bojangles"
+            }, response = {
+                "hello": "world"
+            })
     def on_put(self, req, res, thing_id):
         res.body = '{"hello": "world"}'
     
@@ -67,6 +72,7 @@ Words.
     @returns_status(200, "If all goes well")
     @returns_status(404, "If the thing didn't exist")
     @returns_status(418, "If I'm a teapot")
+    @example(request = "requests can be strings, yo")
     def on_delete(self, req, res, thing_id):
         res.body = '{"hello": "world"}'
 
