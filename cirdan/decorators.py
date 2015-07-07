@@ -43,3 +43,10 @@ def content_type(value):
         route.content_type = value
         return wrapped
     return inner
+
+def requires_permission(value):
+    def inner(wrapped):
+        route = registry.get(wrapped)
+        route.requires_permission = value
+        return wrapped
+    return inner

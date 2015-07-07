@@ -32,6 +32,7 @@ class RouteMethod:
         self.parameters = []
         self.return_statuses = []
         self.content_type = None
+        self.requires_permission = None
 
     def __str__(self):
         return "%s: %s" % (self.verb, str(self.title))

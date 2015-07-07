@@ -14,6 +14,7 @@ class FirstResource():
     @title("Create a thing")
     @description("I have a description")
     @content_type("application/json")
+    @requires_permission("Admin")
     def on_post(self, req, res):
         res.body = '{"hello": "world"}'
 

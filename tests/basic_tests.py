@@ -22,6 +22,7 @@ def test_all_the_things():
         @param("greetings", "what's up")
         @param("ayyyyyy", "what's up")
         @content_type("application/json")
+        @requires_permission("Superman")
         def on_get(self, req, res):
             res.body = "{}"
 
