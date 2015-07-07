@@ -28,6 +28,15 @@ Notes that a route method takes in a parameter with `name` and `description`. Th
 ### @return_status(_status\_code_, _description_)
 Notes that a route returns a particular status code and describes when that would happen.
 
+### @content_type(_type_)
+Note that a route returns a particular content-type in non-error cases.
+
+### @example([_request_,] [_response_])
+Provides an example request and/or response body. Provided objects, if not strings, will be assumed to be JSON.
+
+### @secret
+Marks that a resource class or route method should not be included in docs. These resources/routes won't be included in the payload used to render the HTML, but are still included in `dump()`'s output.
+
 ## API Usage
 
 I've only documented the functions that are intended to be publicly used - if you want to wade through the source, there are nasty but nifty things you could do, I'm sure.

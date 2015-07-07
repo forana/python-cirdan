@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import cirdan
+import copy
 import jinja2
 from cirdan.registry import registry
 from contextlib import closing
@@ -17,12 +18,16 @@ class DocsResource:
             payload = {
                 "name": "Docs",
                 "intro_text": "",
-                "resources": registry.api_to_resources[self.api]
+                "resources": copy.deepcopy(registry.api_to_resources[self.api])
             }
 
             if self.api in registry.api_meta:
                 for key, value in registry.api_meta[self.api].items():
                     payload[key] = value
+
+            payload["resources"] = [resource for resource in payload["resources"] if not resource.secret]
+            for resource in payload["resources"]:
+                resource.methods = [method for method in resource.methods if not method.secret]
 
             self.body = t.render(payload)
 

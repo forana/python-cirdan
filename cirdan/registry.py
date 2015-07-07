@@ -16,6 +16,7 @@ class Resource:
         self.path = "???"
         self.description = None
         self.methods = []
+        self.secret = False
 
     def safe_title(self):
         assert(hasattr(self, "title"))
@@ -31,6 +32,11 @@ class RouteMethod:
         self.description = None
         self.parameters = []
         self.return_statuses = []
+        self.content_type = None
+        self.requires_permission = None
+        self.secret = False
+        self.example_request = None
+        self.example_response = None
 
     def __str__(self):
         return "%s: %s" % (self.verb, str(self.title))

@@ -13,6 +13,8 @@ class FirstResource():
 
     @title("Create a thing")
     @description("I have a description")
+    @content_type("application/json")
+    @requires_permission("Admin")
     def on_post(self, req, res):
         res.body = '{"hello": "world"}'
 
@@ -21,6 +23,10 @@ class FirstResource():
 
     # route with no decorators at all
     def on_put(self, req, res):
+        res.body = "{}"
+
+    @secret
+    def on_delete(self, req, res):
         res.body = "{}"
 
 class SecondResource():
@@ -49,6 +55,11 @@ Words.
 
 Words.
     """)
+    @example(request = {
+                "name": "Bojangles"
+            }, response = {
+                "hello": "world"
+            })
     def on_put(self, req, res, thing_id):
         res.body = '{"hello": "world"}'
     
@@ -61,14 +72,21 @@ Words.
     @returns_status(200, "If all goes well")
     @returns_status(404, "If the thing didn't exist")
     @returns_status(418, "If I'm a teapot")
+    @example(request = "requests can be strings, yo")
     def on_delete(self, req, res, thing_id):
         res.body = '{"hello": "world"}'
+
+@secret
+class ThirdResource:
+    def on_get(self, req, res):
+        res.body = "{}"
 
 cirdan.inject()
 
 app = falcon.API()
 app.add_route("/hello", FirstResource())
 app.add_route("/things/{thing_id}", SecondResource())
+app.add_route("/hidden", ThirdResource())
 
 cirdan.set_meta(app, name = "Cirdan Demo", intro_text = "This is intro text that could be longer if you wanted.")
 

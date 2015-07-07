@@ -21,13 +21,17 @@ def test_all_the_things():
         @param("good morning", "what's up")
         @param("greetings", "what's up")
         @param("ayyyyyy", "what's up")
+        @content_type("application/json")
+        @requires_permission("Superman")
         def on_get(self, req, res):
             res.body = "{}"
 
+        @secret
         def on_post(self, req, res):
             res.body = "{}"
 
         @title("hi")
+        @example(request = "bananas", response = {})
         def on_put(self, req, res):
             res.body = "{}"
 
