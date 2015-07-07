@@ -36,3 +36,10 @@ def returns_status(status_code, description):
         route.return_statuses.append(ReturnStatus(status_code, description))
         return wrapped
     return inner
+
+def content_type(value):
+    def inner(wrapped):
+        route = registry.get(wrapped)
+        route.content_type = value
+        return wrapped
+    return inner

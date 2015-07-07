@@ -21,6 +21,7 @@ def test_all_the_things():
         @param("good morning", "what's up")
         @param("greetings", "what's up")
         @param("ayyyyyy", "what's up")
+        @content_type("application/json")
         def on_get(self, req, res):
             res.body = "{}"
 

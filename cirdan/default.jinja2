@@ -99,7 +99,7 @@
 
             }
 
-            .param-name, .return-status {
+            .param-name, .return-status, .content-type {
                 font-weight: bold;
             }
 
@@ -167,6 +167,9 @@
                                         </li>
                                     {% endfor%}
                                 </ul>
+                            {% endif %}
+                            {% if route.content_type %}
+                                <header class="content-type-name"><span class="content-type">Content-Type: </span> {{ route.content_type }}</header>
                             {% endif %}
                             {% if route.return_statuses %}
                                 <header class="return-statuses-name">Expectable Return Statuses:</header>
