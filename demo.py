@@ -25,6 +25,10 @@ class FirstResource():
     def on_put(self, req, res):
         res.body = "{}"
 
+    @secret
+    def on_delete(self, req, res):
+        res.body = "{}"
+
 class SecondResource():
     @title("Retrieve a thing")
     @description("I have parameters AND a description. I'm such a cool route.")
@@ -66,11 +70,17 @@ Words.
     def on_delete(self, req, res, thing_id):
         res.body = '{"hello": "world"}'
 
+@secret
+class ThirdResource:
+    def on_get(self, req, res):
+        res.body = "{}"
+
 cirdan.inject()
 
 app = falcon.API()
 app.add_route("/hello", FirstResource())
 app.add_route("/things/{thing_id}", SecondResource())
+app.add_route("/hidden", ThirdResource())
 
 cirdan.set_meta(app, name = "Cirdan Demo", intro_text = "This is intro text that could be longer if you wanted.")
 

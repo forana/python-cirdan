@@ -26,6 +26,7 @@ def test_all_the_things():
         def on_get(self, req, res):
             res.body = "{}"
 
+        @secret
         def on_post(self, req, res):
             res.body = "{}"
 

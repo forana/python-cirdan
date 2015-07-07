@@ -22,6 +22,12 @@ def description(value):
         return wrapped
     return inner
 
+# Marks that a resource class or route method should not appear in docs
+def secret(wrapped):
+    item = registry.get(wrapped)
+    item.secret = True
+    return wrapped
+
 # Marks a parameter to a route.
 def param(name, description, required = False):
     def inner(wrapped):
@@ -30,6 +36,7 @@ def param(name, description, required = False):
         return wrapped
     return inner
 
+# Marks that a route can return a certain status under a certain condition
 def returns_status(status_code, description):
     def inner(wrapped):
         route = registry.get(wrapped)
@@ -37,6 +44,7 @@ def returns_status(status_code, description):
         return wrapped
     return inner
 
+# Marks that a route will return a certain content type under successful conditions.
 def content_type(value):
     def inner(wrapped):
         route = registry.get(wrapped)
@@ -44,6 +52,7 @@ def content_type(value):
         return wrapped
     return inner
 
+# Marks that a route requires a certain permission
 def requires_permission(value):
     def inner(wrapped):
         route = registry.get(wrapped)
